@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import logging
-
+from os import getenv
 from securitybot.bot import SecurityBot
 from securitybot.chat.slack import Slack
 from securitybot.tasker.sql_tasker import SQLTasker
@@ -9,11 +9,11 @@ from securitybot.sql import init_sql
 import duo_client
 
 CONFIG = {}
-SLACK_KEY = 'slack_api_token'
-DUO_INTEGRATION = 'duo_integration_key'
-DUO_SECRET = 'duo_secret_key'
-DUO_ENDPOINT = 'duo_endpoint'
-REPORTING_CHANNEL = 'some_slack_channel_id'
+SLACK_KEY = getenv('SLACK_API_TOKEN', 'slack_api_token')
+DUO_INTEGRATION = getenv('DUO_INTEGRATION_KEY', 'duo_integration_key')
+DUO_SECRET = getenv('DUO_SECRET_KEY', 'duo_secret_key')
+DUO_ENDPOINT = getenv('DUO_ENDPOINT', 'duo_endpoint')
+REPORTING_CHANNEL = getenv('REPORTING_CHANNEL', 'some_slack_channel_id')
 ICON_URL = 'https://dl.dropboxusercontent.com/s/t01pwfrqzbz3gzu/securitybot.png'
 
 def init():

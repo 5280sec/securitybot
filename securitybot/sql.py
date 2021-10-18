@@ -3,10 +3,16 @@ A wrapper for the securitybot to access its database.
 '''
 import MySQLdb
 import logging
-
+from os import getenv
 from typing import Any, Sequence
 
 class SQLEngine(object):
+
+    DB_HOST = getenv('DB_HOST', 'localhost')
+    DB_USER = getenv('DB_USER', 'root')
+    DB_PASS = getenv('DB_PASS', '')
+    DB_NAME = getenv('DB_NAME', 'securitybot')
+
     # Whether the singleton has been instantiated
     _host = None # type: str
     _user = None # type: str
@@ -90,4 +96,5 @@ class SQLEngineException(Exception):
 def init_sql():
     # type: () -> None
     '''Initializes SQL.'''
-    SQLEngine('localhost', 'root', '', 'securitybot')
+    SQLEngine(DB_HOST, DB_USER, DB_PASS, DB_NAME)
+
